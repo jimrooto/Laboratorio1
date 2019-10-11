@@ -1,0 +1,64 @@
+	<div style="margin-left:15px"><h1 ><mat-icon  class="tc-blue-grey-700">account_box</mat-icon> &nbsp;Lista De Usuarios</h1>
+  </div>
+&nbsp;
+<button type="button" class="btn btn-success" [routerLink]="['add']" style="margin-top:5px;">&nbsp;Agregar</button>
+  <section  style="margin-left: 2%" class="row mt-5">
+  <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Nombre Usuario</th>
+          <th scope="col">Correo Electrónico</th>
+          <th scope="col">Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuarios of usuarios">
+         <td>{{usuarios.id}}</td> 
+         <td>{{usuarios.username}}</td> 
+         <td>{{usuarios.email}}</td> 
+        <td >
+       <button class="btn btn-secondary" type="button" href="#updateUsuario" data-toggle="modal"  (click)="examenClicked(usuarios)">Editar</button>  
+       <button class="btn btn-danger" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+        [popoverMessage]="popoverMessage"
+        placement="left" (confirm)="delete(usuarios)" (cancel)="cancelClicked = true" > Borrar  </button>
+        </td>    
+          </tr>
+      </tbody>
+    </table>
+	</section>
+		<div class="pad" *ngIf="usuarios?.length === 0" layout="row" layout-align="center">
+				<h3> No hay usuarios para mostrar </h3>
+		</div>
+    <hr>
+<!--*****************************modal ****************-->
+<div class="modal fade" id="updateUsuario" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="signinModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" #btnClose aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Nombre De Usuario:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedUsuario.username" >
+      Correo Electrónico:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedUsuario.email" >
+      Contraseña:<input type="password" class="form-control form-control-sm" [(ngModel)]="selectedUsuario.password" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Close</button>
+        <button type="button" (click)="updateUsuario()" class="btn btn-success">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$('#button').button(function(e) { 
+    e.preventDefault(); 
+    // Coding 
+    $('#updateUsuario').modal('toggle'); //or $('#IDModal').modal('hide'); 
+    return false; 
+}); 
+</script>

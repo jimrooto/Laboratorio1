@@ -1,0 +1,74 @@
+
+
+	  <div style="margin-left:15px"><h1 ><mat-icon  class="tc-blue-grey-700">work</mat-icon> &nbsp;Lista De Doctores</h1>
+    </div>
+    &nbsp;
+    <button type="button" class="btn btn-success" [routerLink]="['add']" style="margin-top:5px;">&nbsp;Agregar</button>
+  <section  style="margin-left: 2%" class="row mt-5">
+  <table class="table table-hover">       
+      <thead>
+        <tr>
+          <th scope="col">Rut</th>
+          <th scope="col">Nombre Doctor</th>
+          <th scope="col">Apellido Doctor</th>
+       	  <th scope="col">Teléfono</th>
+	        <th scope="col">Dirección</th>
+          <th scope="col">Acciones</th>
+     
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doctores of doctores">
+         <td>{{doctores.rutDoc}}</td> 
+         <td>{{doctores.nombreDoc}}</td> 
+         <td>{{doctores.apellidoDoc}}</td> 
+         <td>{{doctores.telefonoDoc}}</td> 
+		     <td>{{doctores.direccionDoc}}</td> 
+        <td>
+       <button class="btn btn-secondary" type="button" href="#updateDoctor" data-toggle="modal"  (click)="examenClicked(doctores)">Editar</button>
+       <button class="btn btn-danger" mwlConfirmationPopover [popoverTitle]="popoverTitle"[popoverMessage]="popoverMessage"
+        placement="left" (confirm)="delete(doctores)"(cancel)="cancelClicked = true" > Borrar  </button>
+        </td>    
+        </tr>
+		  	<div  *ngIf="doctores?.length === 0"  layout-align="center">
+				<h3> No hay doctores para mostrar </h3>
+			</div>  
+      </tbody>
+    </table>
+	</section>
+  <hr>
+  <!-- ****************************Modal***********************-->
+<div class="modal fade" id="updateDoctor" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="signinModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Doctor</h5>
+        <button type="button" class="close" data-dismiss="modal" #btnClose aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Nombre:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedDoctor.nombreDoc">
+      Apellido:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedDoctor.apellidoDoc">
+      Rut:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedDoctor.rutDoc" readonly>
+      Fecha De Creación:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedDoctor.release_date" readonly>
+      Dirección:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedDoctor.direccionDoc">
+      Teléfono :<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedDoctor.telefonoDoc">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="updateDoctor()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$('#button').button(function(e) { 
+    e.preventDefault(); 
+    // Coding 
+    $('#updateDoctor').modal('toggle'); //or $('#IDModal').modal('hide'); 
+    return false; 
+    
+}); 
+</script>

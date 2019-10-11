@@ -1,0 +1,97 @@
+<mat-card>
+	<mat-card-title>
+	Nuevo Doctor
+	</mat-card-title>
+	<mat-divider></mat-divider>
+	<mat-card-content>
+	   &nbsp;
+		<form #depositoForm="ngForm" name="docForm">
+			<div layout="row">
+				<mat-form-field flex>
+					<input matInput
+					[(ngModel)]="doctor.nombreDoc"
+					#elementDescripcionControl="ngModel"
+					type="text" 
+					name="Nombre"
+					placeholder="Nombre Doctor"
+					maxlength="30"
+					required>
+					<mat-hint alig="start">
+						<span [hidden]="elementDescripcionControl.pristine || !elementDescripcionControl.errors?.required" class="tc-red-600"> Requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>
+			<div layout="row">
+				<mat-form-field flex>
+					<input matInput
+					[(ngModel)]="doctor.apellidoDoc"
+					#elementDescripcionControl="ngModel"
+					type="text" 
+					name="Apellido"
+					placeholder="Apellido Doctor"
+					maxlength="30"
+					required>
+					<mat-hint alig="start">
+						<span [hidden]="elementDescripcionControl.pristine || !elementDescripcionControl.errors?.required" class="tc-red-600"> Requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>
+			<div layout="row">
+				<mat-form-field flex >
+					<input matInput validateRut required
+					[(ngModel)]="doctor.rutDoc"
+					#elementcodigoControl="ngModel"
+					type="text" 
+					name="rut"
+					placeholder="Rut Doctor"
+					required gp-rut-validator>
+					<mat-hint alig="start">
+						<span [hidden]="elementcodigoControl.pristine || !elementcodigoControl.errors?.required" class="tc-red-600"> Numero requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>
+			<div layout="row">
+				<mat-form-field flex class="example-full-width">
+				  <i class="fas fa-envelope prefix"></i>
+					<textarea matInput
+					[(ngModel)]="doctor.direccionDoc"
+					#elementcodigoControl="ngModel"
+					type="text" 
+					name="Direccion"
+					placeholder="Dirección"
+					required
+					id="inputIconEx1"></textarea>
+					<mat-hint alig="start">
+						<span [hidden]="elementcodigoControl.pristine || !elementcodigoControl.errors?.required" class="tc-red-600"> Numero requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>
+			<div layout="row">
+				<mat-form-field flex>
+					<input matInput
+					[(ngModel)]="doctor.telefonoDoc"
+					#elementcodigoControl="ngModel"
+					type="text" 
+					name="Telefono"
+					placeholder="Teléfono"
+					required>
+					<mat-hint alig="start">
+						<span [hidden]="elementcodigoControl.pristine || !elementcodigoControl.errors?.required" class="tc-red-600"> Numero requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>
+		</form>
+	</mat-card-content>
+	<mat-divider></mat-divider>
+	<mat-card-actions>
+		<button mat-button [disabled]="!depositoForm.valid" color="primary" (click)="save()">
+		Guardar </button>
+		<button mat-button (click)="redirect()"> 
+		Volver </button>
+	</mat-card-actions>
+</mat-card>

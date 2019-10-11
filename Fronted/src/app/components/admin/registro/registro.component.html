@@ -1,0 +1,70 @@
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+<mat-card>
+	<mat-card-title>
+ 		Nuevo Usuario
+	</mat-card-title>
+	<mat-divider></mat-divider>
+	<mat-card-content>
+   &nbsp;
+		<form #depositoForm="ngForm" name="myForm" ng-controller="Ctrl">
+			<div layout="row">
+				<mat-form-field flex>
+					<input matInput
+					[(ngModel)]="usuario.username"
+					#elementDescripcionControl="ngModel"
+					type="text" 
+					name="Nombre"
+					placeholder="Nombre Usuario"
+					maxlength="30"
+					required
+					>
+					<mat-hint alig="start">
+						<span [hidden]="elementDescripcionControl.pristine || !elementDescripcionControl.errors?.required" class="tc-red-600"> Requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>
+			<div layout="row">
+				<mat-form-field flex>
+					<input matInput
+					[(ngModel)]="usuario.password"
+					#elementcodigoControl="ngModel"
+					type="password" 
+					name="password"
+					placeholder="contraseña"
+					required
+					>
+					<mat-hint alig="start">
+						<span [hidden]="elementcodigoControl.pristine || !elementcodigoControl.errors?.required" class="tc-red-600"> Numero requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>
+	<div layout="row">
+				<mat-form-field flex>
+					<input matInput pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+					[(ngModel)]="usuario.email"
+					#elementcodigoControl="ngModel"
+					type="email" 
+					name="email"
+					placeholder="Correo Electrónico"
+					required
+					>
+					
+					<mat-hint alig="start">
+						<span [hidden]="elementcodigoControl.pristine || !elementcodigoControl.errors?.required" class="tc-red-600"> Numero requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>		
+		</form>
+	</mat-card-content>
+	<mat-divider></mat-divider>
+	<mat-card-actions>
+		<button mat-button [disabled]="!depositoForm.valid" color="primary" (click)="save()">
+		Guardar </button>
+		<button mat-button (click)="redirect()"> 
+		Volver </button>
+	</mat-card-actions>
+</mat-card>
+

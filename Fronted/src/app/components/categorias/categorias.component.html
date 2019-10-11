@@ -1,0 +1,78 @@
+			<div style="margin-left:15px"><h1 ><mat-icon  class="tc-blue-grey-700">apps
+      </mat-icon> &nbsp;Lista De Categoría</h1>
+  </div>
+  &nbsp;
+<button type="button" class="btn btn-success" [routerLink]="['add']" 
+style="margin-top:5px;">&nbsp;Agregar</button>
+  <section  style="margin-left: 2%" class="row mt-5">
+
+  <table  class="table table-hover" >
+      <thead>
+        <tr>
+          <th scope="col">Código</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Fecha De Creación</th>
+          <th scope="col">Detalle</th>
+          <th scope="col">&nbsp;</th>
+          <th scope="col">&nbsp;</th>
+          <th scope="col">Acción</th>     
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let categorias of categorias">
+         <td>{{categorias.id}}</td> 
+         <td>{{categorias.nombreCat}}</td>
+         <td>{{categorias.release_date}}</td>  
+         <td>{{categorias.detalleCat}}</td> 
+         <td>&nbsp;</td>  
+         <td>&nbsp;</td>  
+        <td >
+      <button class="btn btn-secondary" type="button" href="#signinModal" data-toggle="modal"  
+      (click)="examenClicked(categorias)">Editar</button>  
+       <button class="btn btn-danger" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+        [popoverMessage]="popoverMessage"
+        placement="left" (confirm)="delete(categorias)" (cancel)="cancelClicked = true" > Borrar  </button>
+        </td>    
+          </tr>
+      </tbody>
+    </table>
+	</section>
+    	<div class="pad" *ngIf="categorias?.length === 0" layout="row" layout-align="center">
+				<h3> No hay categorias para mostrar </h3>
+			</div>
+      <hr>
+      <!-- *****************Ventana Modal*******************-->
+<div class="modal fade" id="signinModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="signinModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Datos Categoria:</h5>
+        <button type="button" class="close" data-dismiss="modal" #btnClose aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Nombre Categoria:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedCategory.nombreCat" >
+        Detalle De Categoria:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedCategory.detalleCat" >
+        Fecha De Creacion:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedCategory.release_date" readonly>
+      </div>
+      <div class="modal-footer">
+           <button type="button" (click)="updateCategory()" class="btn btn-success">Editar
+           </button>
+         
+        <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">
+        Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--*******************MODAL **************************-->
+<script>
+$('#button').button(function(e) { 
+    e.preventDefault(); 
+    // Coding 
+    $('#signinModal').modal('toggle'); //or $('#IDModal').modal('hide'); 
+    return false; 
+}); 
+</script>

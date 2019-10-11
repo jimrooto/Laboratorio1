@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+.will-load {
+    min-height: 80px;
+}
+
+a[md-icon-button] {
+    line-height: 36px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.text-capital {
+  text-transform: capitalize;
+}
+.mat-toolbar.mat-primary {
+  background: #800040;
+  color: #fff;
+}
+
+td-layout-manage-list .mat-toolbar {
+    font-weight: 400;
+}
+.btn-success {
+  color: #fff;
+  background-color: #800040;
+  border-color: #800040;
+}
+ 
+  
+  
+  
+  

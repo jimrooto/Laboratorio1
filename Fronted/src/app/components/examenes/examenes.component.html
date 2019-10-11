@@ -1,0 +1,187 @@
+	<style type="text/css">
+    body {
+        overflow-x: hidden;
+    }
+</style>
+  <div ><h1 ><mat-icon  style="margin-left:15px" class="tc-blue-grey-700">description</mat-icon> &nbsp;Lista De Exámenes
+</h1>
+  </div>
+  &nbsp;
+<button type="button" class="btn btn-success" [routerLink]="['add']" >&nbsp;Agregar</button>
+  <section style="margin-left: 1%" class="row mt-5">
+  <table  class="table table-hover">          
+      <thead>
+        <tr>
+        <th scope="col">Nombre Examen</th>
+        <th scope="col">Categoría</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Nombre Paciente</th>
+        <th scope="col">Apellido Paciente</th>
+        <th scope="col">Apellido Doctor</th>           
+        <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let examenes of examenes">    
+        <td>{{examenes.nombreExa}}</td> 
+        <td>{{examenes.categoriaExa}}</td> 
+		    <td>{{examenes.fechaExa}}</td>
+        <td>{{examenes.nombrePac}}</td>
+        <td>{{examenes.apellidoPac}}</td>
+        <td>{{examenes.apellidoDoc}}</td>
+        <td >
+        <button class="btn btn-secondary" href="#EditarExamen" data-toggle="modal"  (click)="examenClicked(examenes)">Editar</button>      
+        <button class="btn btn-danger" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+[popoverMessage]="popoverMessage"
+placement="left" (confirm)="delete(examenes)"
+(cancel)="cancelClicked = true" > 
+ Borrar  </button>
+        <button class="btn btn-primary" href="#signinModal" data-toggle="modal"  (click)="examenClicked(examenes)">Detalle</button>     
+    
+        </td>
+          </tr>
+      </tbody>
+         	<div class="pad" *ngIf="examenes?.length === 0" layout="row" layout-align="center">
+				<h3> No hay examenes para mostrar </h3>   
+			</div>
+    </table>
+	</section>
+   <hr>
+ <!-- *****************Ventana Modal*******************-->
+<div class="modal fade" id="signinModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="signinModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalles Exámen</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+ 
+        <div class="modal-body">
+          Fecha De Creación: <input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.release_date" readonly>   
+         <hr>
+         <table>
+         <tr>
+          <th>
+          <div>
+          Nombre Paciente:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.nombrePac" readonly>
+          </div>
+          </th>
+          <th>
+          <div>
+          Apellido Paciente:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.apellidoPac" readonly>
+          </div>
+          </th>
+          <th>
+          <div>
+          Rut Paciente:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.rutPac" readonly>
+          </div>  
+          </th>
+         </tr>
+          </table>    
+          <hr>
+          <table>
+          <th>
+          <div>
+          Nombre Doctor:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.nombreDoc" readonly>
+          </div></th><th><div>
+          Apellido Doctor:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.apellidoDoc" readonly>
+          </div></th>
+          </table>
+          <hr>
+          <table>
+          <th>
+          <div>
+          Categoría Exámen:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.categoriaExa" readonly>
+          </div></th>
+          <th>
+          <div>
+          Nombre Exámen:<input  type="text"  class="form-control form-control-sm" [(ngModel)]="selectedExamen.nombreExa" readonly>
+          </div></th>
+          <th>
+          <div>
+          Fecha De Exámen:<input  type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.fechaExa" readonly>
+          </div></th>
+          </table>
+          <div>
+          Detalle Del Exámen:<input type="text" class="form-control" [(ngModel)]="selectedExamen.descripcionExa" readonly>
+          </div>
+         </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" (click)="print(examenes)">Imprimir</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      
+    </div>
+  </div>
+</div>
+ <!-- *****************Ventana Modal*******************-->
+<div style="position:fixed" class="modal fade" id="EditarExamen" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="signinModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Examen</h5>
+        <button type="button" class="close" data-dismiss="modal" #btnClose aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      Fecha De Creación: <input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.release_date" readonly>   
+     <hr>
+         <table>
+         <tr>
+          <th>
+          <div>
+          Nombre Paciente:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.nombrePac" >
+          </div>
+          </th>
+          <th>
+          <div>
+          Apellido Paciente:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.apellidoPac" >
+          </div>
+          </th>
+          <th>
+          <div>
+          Rut Paciente:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.rutPac" readonly >
+          </div>  
+          </th>
+         </tr>
+          </table>    
+          <hr>
+          <table>
+          <th>
+          <div>
+          Nombre Doctor:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.nombreDoc" >
+          </div></th><th><div>
+          Apellido Doctor:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.apellidoDoc" >
+          </div></th>
+          </table>
+          <hr>
+          <table>
+          <th>
+           <select  [(ngModel)]="selectedExamen.categoriaExa" name="categoriaExa">
+    <option *ngFor="let categorias of categorias" name="categoriaExa"	  [value]="selectedExamen.nombreCat">
+      {{selectedExamen.nombreCat}}
+    </option>
+  </select></th>
+          <th>
+          <div>
+          Nombre Exámen:<input  type="text"  class="form-control form-control-sm" [(ngModel)]="selectedExamen.nombreExa" >
+          </div></th>
+          <th>
+          <div>
+          Fecha De Exámen:<input  type="date" class="form-control form-control-sm" [(ngModel)]="selectedExamen.fechaExa" >
+          </div></th>
+          </table>
+          <div>
+          Detalle Del Exámen:<input type="text" class="form-control form-control-sm" [(ngModel)]="selectedExamen.descripcionExa" >
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary"  (click)="updateExamen()">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>

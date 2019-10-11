@@ -1,0 +1,65 @@
+<mat-card>
+
+	<mat-card-title>
+		Nuevo Categoría
+	</mat-card-title>
+
+	<mat-divider></mat-divider>
+
+	<mat-card-content>
+   &nbsp;
+		<form #categoriaForm="ngForm">
+
+
+			<div layout="row">
+				<mat-form-field flex >
+					<input matInput
+					[(ngModel)]="categoria.nombreCat"
+					#elementDescripcionControl="ngModel"
+					type="text" 
+					name="Nombre"
+					placeholder="Nombre Categoría"
+					maxlength="30"
+					required
+					>
+					<mat-hint alig="start">
+						<span [hidden]="elementDescripcionControl.pristine || !elementDescripcionControl.errors?.required" class="tc-red-600"> Requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>
+			<div layout="row">
+				<mat-form-field flex >
+					<textarea matInput
+					[(ngModel)]="categoria.detalleCat"
+					#elementDescripcionControl="ngModel"
+					type="text" 
+					name="Detalle"
+					placeholder="Detalle Categoría"
+					maxlength="30"
+					required
+					></textarea>
+					<mat-hint alig="start">
+						<span [hidden]="elementDescripcionControl.pristine || !elementDescripcionControl.errors?.required" class="tc-red-600"> Requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>
+
+		
+
+
+		</form>
+
+	</mat-card-content>
+
+	<mat-divider></mat-divider>
+
+	<mat-card-actions>
+		<button mat-button [disabled]="!categoriaForm.valid" color="primary" (click)="save()">
+		Guardar </button>
+		<button mat-button (click)="redirect()"> 
+		Volver </button>
+	</mat-card-actions>
+   
+</mat-card>

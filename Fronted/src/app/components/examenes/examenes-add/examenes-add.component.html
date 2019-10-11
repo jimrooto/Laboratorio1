@@ -1,0 +1,154 @@
+
+<mat-card>
+
+	<mat-card-title>
+Nuevo Exámen
+	</mat-card-title>
+
+	<mat-divider></mat-divider>
+
+	<mat-card-content>
+   &nbsp;
+		<form #depositoForm="ngForm">
+    	<div layout="row">
+      <mat-form-field>
+  <mat-label>Listado Categorías</mat-label>
+  <mat-select  [(ngModel)]="examen.categoriaExa" name="categoriaExa">
+    <mat-option *ngFor="let categorias of categorias" name="categoriaExa"	  [value]="categorias.nombreCat"
+              >
+      {{categorias.nombreCat}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+ 
+<mat-form-field flex>
+					<input matInput
+					[(ngModel)]="examen.rutPac"
+					#elementDescripcionControl="ngModel"
+					type="text" 
+					name="Nombre"
+					placeholder="Rut Paciente"
+					maxlength="30"
+					required gp-rut-validator
+					>
+
+					<mat-hint alig="start">
+						<span [hidden]="elementDescripcionControl.pristine || !elementDescripcionControl.errors?.required" class="tc-red-600"> Requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+
+	   <mat-form-field>
+  <mat-label>Listado de Doctores</mat-label>
+  <mat-select  [(ngModel)]="examen.apellidoDoc" name="apellidoDoc">
+    <mat-option *ngFor="let doctores of doctores" name="apellidoDoc"	  [value]="doctores.apellidoDoc">
+      {{doctores.apellidoDoc}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+</div>
+			<div layout="row">
+				<mat-form-field flex>
+					<input matInput
+					[(ngModel)]="examen.nombreExa"
+					#elementDescripcionControl="ngModel"
+					type="text" 
+					name="Nombre"
+					placeholder="Nombre Exámen"
+					maxlength="30"
+					required
+					>
+
+					<mat-hint alig="start">
+						<span [hidden]="elementDescripcionControl.pristine || !elementDescripcionControl.errors?.required" class="tc-red-600"> Requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+				<mat-form-field flex >
+				    <input matInput
+					[(ngModel)]="examen.nombrePac"
+					#elementDescripcionControl="ngModel"
+					type="text" 
+					name="NombrePac"
+					placeholder="Nombre Paciente"
+					maxlength="30"
+				
+					></mat-form-field>
+					<mat-hint alig="start">
+						<span [hidden]="elementDescripcionControl.pristine || !elementDescripcionControl.errors?.required" class="tc-red-600"> Requerido
+						</span>
+					</mat-hint>
+				
+						<mat-form-field >
+					<input matInput
+					[(ngModel)]="examen.nombreDoc"
+					#elementDescripcionControl="ngModel"
+					type="text" 
+					name="NombreDoc"
+					placeholder="Nombre Doctor"
+					maxlength="30"
+					required
+					>
+					<mat-hint alig="start">
+						<span [hidden]="elementDescripcionControl.pristine || !elementDescripcionControl.errors?.required" class="tc-red-600"> Requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>
+
+			<div layout="row">
+				<mat-form-field flex class="example-full-width">
+					<textarea matInput
+					[(ngModel)]="examen.descripcionExa"
+					#elementcodigoControl="ngModel"
+					type="text" 
+					name="detalle"
+					placeholder="Detalle Exámen"
+					required
+					></textarea>
+					<mat-hint alig="start">
+						<span [hidden]="elementcodigoControl.pristine || !elementcodigoControl.errors?.required" class="tc-red-600"> Numero requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+					<mat-form-field flex >
+					<input matInput
+					[(ngModel)]="examen.apellidoPac"
+					#elementDescripcionControl="ngModel"
+					type="text" 
+					name="ApellidoPac"
+					placeholder="Apellido Paciente"
+					maxlength="30"
+					required 
+					>
+					<mat-hint alig="start">
+						<span [hidden]="elementDescripcionControl.pristine || !elementDescripcionControl.errors?.required" class="tc-red-600"> Requerido
+						</span>
+					</mat-hint>
+				</mat-form-field>
+			</div>
+
+
+			<div layout="row">
+   <div class="input-group date"  style="width:15%">
+  <input type="date" class="form-control" name="fechaExa" [(ngModel)]="examen.fechaExa"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+</div>
+			</div>
+
+
+		</form>
+
+	</mat-card-content>
+
+	<mat-divider></mat-divider>
+
+	<mat-card-actions>
+		<button mat-button [disabled]="!depositoForm.valid" color="primary" (click)="save()">
+		Guardar </button>
+		<button mat-button (click)="redirect()"> 
+		Volver </button>
+	</mat-card-actions>
+
+</mat-card>
+   	
